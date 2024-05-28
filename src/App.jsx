@@ -7,8 +7,25 @@ import SelectedProject from "./components/SelectedProject";
 function App() {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
-    projects: [],
+    projects: [
+      {
+        title: "Demo",
+        description: "Demo",
+        dueDate: "01-01-2003",
+        id:Math.random()
+      },
+    ],
   });
+
+  function handleDeleteProject(idToDelete){
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(project => project.id != idToDelete)
+      };
+    });
+  }
 
   function handleSelectProject(id){
     setProjectState((prevState) => {
@@ -63,7 +80,7 @@ function App() {
   } else if (projectState.selectedProjectId === null) {
     content = <NewProject onAddProject = {handleAddProject} onCancelProject = {handleCancelProject}/>;
   }else{
-    content = <SelectedProject project={selectedProject}/>;
+    content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject}/>;
   }
 
   // RETURN
