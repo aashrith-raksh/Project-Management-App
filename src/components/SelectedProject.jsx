@@ -1,3 +1,5 @@
+import Tasks from "./Tasks"
+
 export default function SelectedProject({project, onDeleteProject}){
 
     const formattedDueDate = new Date(project.dueDate).toLocaleDateString('en-US', {
@@ -15,5 +17,6 @@ export default function SelectedProject({project, onDeleteProject}){
             <p className="mb-4 text-stone-400 ">{formattedDueDate}</p>
             <p className="text stroke-neutral-600 whitespace-pre-wrap max-w-md  ">{project.description}</p>
         </header>
+        <Tasks/>
     </div>
 }
